@@ -1,5 +1,6 @@
 from time import localtime, strftime, mktime, strptime
 
+'''
 # time module is okay for this UTC and back in my timezone only!
 now = 1407694710
 local_tuple = localtime(now)
@@ -36,4 +37,4 @@ now = datetime.strptime(time_str, time_format)
 time_tuple = now.timetuple()
 utc_now = mktime(time_tuple)
 print(utc_now)
-'''
+

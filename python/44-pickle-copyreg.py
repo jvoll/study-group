@@ -4,19 +4,19 @@ import pickle
 class GameState(object):
     # fix for unpickling issue -- default constructor args
     #def __init__(self, level=0, lives=4, points=0):
-    #def __init__(self, level=0, lives=4, points=0, magic=5):
-        #self.level = level
-        #self.lives = lives
-        #self.points = points
+    def __init__(self, level=0, lives=4, points=0):
+        self.level = level
+        self.lives = lives
+        self.points = points
         #self.magic = magic
 
-    def __init__(self):
-        self.level = 0
-        self.lives = 4
+    #def __init__(self):
+        #self.level = 0
+        #self.lives = 4
 
         # comment this in and loadSavedGame
         # point will be missing from unpickled object despite using new GameState object
-        # self.points = 0
+        #self.points = 0
 
 state_path = '/tmp/game_state.bin'
 
@@ -40,18 +40,18 @@ def loadSavedGame():
 
 def pickle_game_state(game_state):
     kwargs = game_state.__dict__
-    #kwargs['vesion'] = 2
+    kwargs['version'] = 2
     return unpickle_game_state, (kwargs,)
 
 def unpickle_game_state(kwargs):
     version = kwargs.pop('version', 1)
     # Use versioning to make backwards-incompatible changes (for example deleting or renaming a field)
-    #if version == 1:
-    #   kwargs.pop('magic')
+    if version == 1:
+       kwargs.pop('magic')
     return GameState(**kwargs)
 
 # register pickling wrappers with copyreg built-in module
-#copyreg.pickle(GameState, pickle_game_state)
+copyreg.pickle(GameState, pickle_game_state)
 
-playGameAndSave()
+#playGameAndSave()
 loadSavedGame()

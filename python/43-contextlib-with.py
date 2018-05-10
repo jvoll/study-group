@@ -13,7 +13,7 @@ def log_level(level, name):
 
 with log_level(logging.DEBUG, 'my-log') as logger:
     print(logger.getEffectiveLevel())
-    logger.setLevel(logging.DEBUG)
+    # logger.setLevel(logging.DEBUG)
     logger.debug('This is my message!')
     logging.debug('This will not print -- only set log level to DEBUG on logger not logging')
 
